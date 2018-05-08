@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class WaypointManager : MonoBehaviour {
 
@@ -24,9 +25,10 @@ public class WaypointManager : MonoBehaviour {
 
 	public GameObject getCurrentWayPoint()
 	{
-		return wayPointController.objects[wayPointController.currentIndex];
+        return wayPointController.objects[wayPointController.currentIndex];
 	}
 
+    // Find the length of way points and build an array of them.
 	void initialiseWayPointCheckList()
 	{
 		int _lengthOfWayPoints = wayPointController.objects.Length;
@@ -41,22 +43,20 @@ public class WaypointManager : MonoBehaviour {
 
 	}
 
+    // Change flag when a checkpoint is reached
 	void setWayPointFlag(bool _hasReachedWayPoint)
 	{
 		wayPointController.checkList[wayPointController.currentIndex] = _hasReachedWayPoint;
 	}
 
+    // Define the next waypoint
 	void setNextSequencialWayPoint()
 	{
-
 		if (!(wayPointController.currentIndex >= wayPointController.checkList.Length - 1))
 		{
-
 			wayPointController.checkList[wayPointController.currentIndex] = false;
 			wayPointController.currentIndex++;
-
 		}
-
 	}
 
 	bool allWayPointsVisited()
@@ -99,7 +99,8 @@ public class WaypointManager : MonoBehaviour {
 	void Start()
 	{
 		wayPointController.tagName = tagName;
-		wayPointController.objects = GameObject.FindGameObjectsWithTag(wayPointController.tagName);
+        wayPointController.objects = GameObject.FindGameObjectsWithTag(wayPointController.tagName).OrderBy(go => go.name).ToArray();
+        Debug.Log(wayPointController.objects[0].name + wayPointController.objects.Length);
 		initialiseWayPointCheckList();
 	}
 
@@ -109,14 +110,15 @@ public class WaypointManager : MonoBehaviour {
 		if (wayPointController.checkList[wayPointController.currentIndex] == false)
 		{
 
-			GameObject _target = wayPointController.objects[wayPointController.currentIndex]; // SHOULD FIND THE CLOSEST.
+			GameObject _target = wayPointController.objects[wayPointController.currentIndex];
 
 			bool _hasReachedWayPoint = wayPointReached(_target);
 
 			if (_hasReachedWayPoint == true)
 			{
 				setWayPointFlag(_hasReachedWayPoint);
-				setNextSequencialWayPoint();
+                setNextSequencialWayPoint();
+                    
 			}
 
 		}

@@ -90,4 +90,14 @@ public class Alien : MonoBehaviour
 
 	}
 
+    //void OnCollisionEnter(Collision col)
+    //{
+    //    Debug.Log(col.gameObject.tag);
+
+    //    //if (col.gameObject.tag == "Beam")
+    //    //{
+    //    //    Destroy(col.gameObject);
+    //    //}
+    //}
+
 }
