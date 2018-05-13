@@ -13,7 +13,7 @@ public class RotateAround : MonoBehaviour {
         //transform.Translate(Vector3.right * Time.deltaTime);
 	//}
 
-    private float speedMod = 1.0f;//a speed modifier
+    private float speedMod = 0.2f;//a speed modifier
     private Vector3 point; //the coord to the point where the camera looks at
 
     void Start()

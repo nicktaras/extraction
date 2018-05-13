@@ -1,4 +1,5 @@
 ﻿/* Alien (UNITY C#)
+/* Alien (UNITY C#)
 * 
 * Alien:
 * 
@@ -23,28 +24,21 @@ using UnityEngine;
 
 public class Alien : MonoBehaviour
 {
-    
+
+	public bool isAllowedToMove = false;
+	public bool isSaved = false;
+
 	public class AlienManager
 	{
 		public GameObject wayPointTarget;
-		public bool isAllowedToMove;
 
-		public AlienManager(bool _isAllowedToMove)
-		{
-			isAllowedToMove = _isAllowedToMove;
-		}
-
-		public AlienManager()
-		{
-			isAllowedToMove = false;
-		}
 	}
 
-	public AlienManager alien = new AlienManager(false);
+	private AlienManager alien = new AlienManager();
 
 	void Start()
 	{
-		alien.isAllowedToMove = true;
+		isAllowedToMove = true;
 	}
 
 	bool wayPointReached(GameObject _target)
@@ -56,9 +50,9 @@ public class Alien : MonoBehaviour
 
 		float distance = (currentPosition - _target.transform.position).sqrMagnitude;
 
-        // Close to Target - Adjust for precision.
+		// Close to Target - Adjust for precision.
 		if (distance < Random.Range(1, 2))
-		{ 
+		{
 			_wayPointReached = true;
 		}
 
@@ -71,33 +65,37 @@ public class Alien : MonoBehaviour
 
 		// Apply for sequential waypoints.
 		WaypointManager _WayPointManager = GetComponent<WaypointManager>();
-        alien.wayPointTarget = _WayPointManager.getCurrentWayPoint();
+		alien.wayPointTarget = _WayPointManager.getCurrentWayPoint();
 
 		MoveTowards _moveTowards = GetComponent<MoveTowards>();
-        _moveTowards.moveToTarget(alien.wayPointTarget);
+		_moveTowards.moveToTarget(alien.wayPointTarget);
 
+	}
+
+	void saved()
+	{
+		MoveTowards _moveTowards = GetComponent<MoveTowards>();
+		GameObject AlienSavedCheckPoint = GameObject.Find("AlienSavedCheckPoint");
+		_moveTowards.speed = 4;
+		_moveTowards.moveToTarget(AlienSavedCheckPoint);
 	}
 
 	void Update()
 	{
 
-        if (alien.isAllowedToMove)
+		if (isAllowedToMove)
 		{
 
 			move();
 
 		}
 
+		if (isSaved)
+		{
+
+			saved();
+
+		}
+
 	}
-
-    //void OnCollisionEnter(Collision col)
-    //{
-    //    Debug.Log(col.gameObject.tag);
-
-    //    //if (col.gameObject.tag == "Beam")
-    //    //{
-    //    //    Destroy(col.gameObject);
-    //    //}
-    //}
-
 }
