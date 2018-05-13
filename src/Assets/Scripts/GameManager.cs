@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+		aliensSaved = 0;
+	    aliensLost = 0;
         score.text = "Lives Saved: " + aliensSaved.ToString() + " / Lives Lost: " + aliensLost.ToString() + " / Time Left: 199s";
 
     }
