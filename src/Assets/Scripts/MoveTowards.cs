@@ -27,9 +27,14 @@ public class MoveTowards : MonoBehaviour
 	public float speed;
 	public float RotationSpeed = 1;
 
+	void Start()
+	{
+        speed = Random.Range(0.5F, 1.2F);
+	}
+
 	public void moveToTarget(GameObject _target)
 	{
-
+        
 		float step = speed * Time.deltaTime;
 		transform.position = Vector3.MoveTowards(transform.position, _target.transform.position, step);
 

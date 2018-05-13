@@ -2,27 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO this should be updated to AlienCollisionManager
 public class SaveAlien : MonoBehaviour {
     
 	public delegate void AlienSaved();
 	public static event AlienSaved DispatchAlienSavedEvent;
 
-	// Use this for initialization
-	void Start () {
-       
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	public delegate void AlienKilled();
+	public static event AlienKilled DispatchAlienKilledEvent;
 
-    void goToMotherShip () {
-        
-    }
-
-    // Save Aliens - This should trigger a 
-    // 'beam me up scotty' animation... :)
     void OnCollisionEnter(Collision col)
     {
         // Collect Alien with Beam
@@ -30,8 +18,8 @@ public class SaveAlien : MonoBehaviour {
         {
             gameObject.GetComponent<Alien>().isSaved = true;
             gameObject.GetComponent<Alien>().isAllowedToMove = false;
-			GameObject ChildGameObject1 = gameObject.transform.GetChild(0).gameObject;
-            ChildGameObject1.GetComponent<Renderer>().enabled = true;
+			//GameObject ChildGameObject1 = gameObject.transform.GetChild(0).gameObject;
+            //ChildGameObject1.GetComponent<Renderer>().enabled = true;
         }
 
         // Beam has successfully collected Alien
@@ -40,6 +28,13 @@ public class SaveAlien : MonoBehaviour {
             Destroy(this.gameObject);
             DispatchAlienSavedEvent();
         }
+
+        // TODO animation for killed?
+        if (col.gameObject.tag == "Explosion"){
+            Destroy(this.gameObject);
+            DispatchAlienKilledEvent();
+        }
+
     }
 
 }

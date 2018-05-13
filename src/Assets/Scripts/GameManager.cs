@@ -4,19 +4,28 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
-
-    public int aliensSaved = 0;
-    //public Text Mytext;
+    
+    public static int aliensSaved = 0;
+    public static int aliensLost = 0;
+    public Text score;
+    public float countDownTime = 180f;
 
 	void OnEnable()
 	{
 		SaveAlien.DispatchAlienSavedEvent += alienSavedScoreUpdate;
+        SaveAlien.DispatchAlienKilledEvent += alienKilledScoreUpdate;
 	}
 
 	void OnDisable()
 	{
 		SaveAlien.DispatchAlienSavedEvent -= alienSavedScoreUpdate;
+        SaveAlien.DispatchAlienKilledEvent -= alienKilledScoreUpdate;
 	}
+
+    void alienKilledScoreUpdate()
+    {
+        aliensLost++;
+    }
 
 	void alienSavedScoreUpdate()
 	{
@@ -25,14 +34,23 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//Text.GetComponent<Text>().text = "Score: " + aliensSaved.ToString();
-		Transform child = transform.Find("Mytext");
-		Text t = child.GetComponent<Text>();
-        t.text = "Yoyoyoyo";
+
+        score.text = "Lives Saved: " + aliensSaved.ToString() + " / Lives Lost: " + aliensLost.ToString() + " / Time Left: 199s";
+
     }
 
-	
 	// Update is called once per frame
-	void Update () {}
+	void Update () {
+
+		score.text = "Lives Saved: " + aliensSaved.ToString() + " / Lives Lost: " + aliensLost.ToString() + " / Time Left: " + countDownTime.ToString() + "s";
+
+		countDownTime -= Time.deltaTime;
+
+		if (countDownTime <= 0.0f)
+		{
+			Application.LoadLevel("EndGame");
+		}
+
+	}
 
 }

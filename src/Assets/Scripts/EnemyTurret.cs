@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyTurret : MonoBehaviour {
 
 	public GameObject bullet;                // The enemy prefab to be spawned.
-	public float spawnTime = 3f;             // How long between each spawn. 
+	public float spawnTime = 6f;             // How long between each spawn. 
 
 	void Start()
 	{

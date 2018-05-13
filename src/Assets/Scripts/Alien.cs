@@ -27,6 +27,7 @@ public class Alien : MonoBehaviour
 
 	public bool isAllowedToMove = false;
 	public bool isSaved = false;
+    public bool isKilled = false;
 
 	public class AlienManager
 	{
@@ -80,6 +81,10 @@ public class Alien : MonoBehaviour
 		_moveTowards.moveToTarget(AlienSavedCheckPoint);
 	}
 
+    void killed(){
+        
+    }
+
 	void Update()
 	{
 
@@ -94,6 +99,13 @@ public class Alien : MonoBehaviour
 		{
 
 			saved();
+
+		}
+
+		if (isKilled)
+		{
+
+			killed();
 
 		}
 

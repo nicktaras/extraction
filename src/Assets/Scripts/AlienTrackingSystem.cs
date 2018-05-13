@@ -4,7 +4,6 @@ public class AlienTrackingSystem : MonoBehaviour
 {
 	// The target marker.
 	private Transform target;
-    private bool targetAcquired = false;
     public GameObject[] alienTargets;
 
 	// Angular speed in radians per sec.
@@ -12,30 +11,25 @@ public class AlienTrackingSystem : MonoBehaviour
 
     void FindTarget() {
 
+        // Create Array of available targets.
         alienTargets = GameObject.FindGameObjectsWithTag("Alien");
 
-        if (alienTargets != null || alienTargets != null && target == null)
-        {
-            int targetIndex = Random.Range(0, alienTargets.Length);
-            target = alienTargets[targetIndex].transform;
+        if(alienTargets.Length > 0) {
+            AssignTarget();
         }
 
-        if (target != null)
-        {
-            targetAcquired = true;
+    }
 
-        } else {
-            
-            targetAcquired = false;
-
-        }
-
+    void AssignTarget()
+    {
+        int targetIndex = Random.Range(0, alienTargets.Length -1);
+        target = alienTargets[targetIndex].transform;
     }
 
 	void Update()
 	{
 
-        if (targetAcquired)
+        if (target != null)
         {
 
             Vector3 targetDir = target.position - transform.position;
