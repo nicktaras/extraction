@@ -18,4 +18,4 @@ Dream Hack Game Jam Austin
 
 ## Have fun!
 
-Edit the code as you like, change the rules up, save some aliens.
+Edit the code as you like, change the rules up, change the assets, enjoy.
