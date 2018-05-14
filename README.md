@@ -16,3 +16,6 @@ Dream Hack Game Jam Austin
 
 - Use the arrow keys to move the mothership Left / Right / In / Out
 
+## Have fun!
+
+Edit the code as you like, change the rules up, save some aliens.
