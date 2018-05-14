@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Class to output game results to player.
+
 public class GameOver : MonoBehaviour {
 
     public Text results;

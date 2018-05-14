@@ -1,40 +1,32 @@
 ﻿/* Alien (UNITY C#)
 /* Alien (UNITY C#)
 * 
-* Alien:
+* Alien: 
 * 
-* USE:
-* - To orchestrate the Alien ai.
-* - This class has waypoints and move towards classes.
+* A Class to manage the state of an Alien whilst on stage.
 * 
-* PARAMS:
-* - tagName of way point to use
-* 
-* TEST: 
-* tbc
-* 
-* AUTHOR: 
-* Nicholas Taras
-*
 */
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Alien : MonoBehaviour
 {
 
-	public bool isAllowedToMove = false;
-	public bool isSaved = false;
-    public bool isKilled = false;
+    /* 
+     Public Vars
+     Game Idea: Dispatch isSaved event for a short period of time (bonus save event)
+    */
 
+	public bool isAllowedToMove = false; // alien cannot move until true
+	public bool isSaved = false;         // when the alien has been saved 
+
+    // Alien Constructor
 	public class AlienManager
 	{
 		public GameObject wayPointTarget;
-
 	}
 
+	// Create instance of AlienManager
 	private AlienManager alien = new AlienManager();
 
 	void Start()
@@ -42,37 +34,27 @@ public class Alien : MonoBehaviour
 		isAllowedToMove = true;
 	}
 
-	bool wayPointReached(GameObject _target)
-	{
-
-		Vector3 currentPosition = transform.position;
-
-		bool _wayPointReached = false;
-
-		float distance = (currentPosition - _target.transform.position).sqrMagnitude;
-
-		// Close to Target - Adjust for precision.
-		if (distance < Random.Range(1, 2))
-		{
-			_wayPointReached = true;
-		}
-
-		return _wayPointReached;
-
-	}
-
+    // When Moving Aliens will make their way towards
+    // their specified waypoint object.
 	void move()
 	{
 
-		// Apply for sequential waypoints.
+		// Create reference to WaypointManager Class
 		WaypointManager _WayPointManager = GetComponent<WaypointManager>();
+
+        // Define Current waypoint
 		alien.wayPointTarget = _WayPointManager.getCurrentWayPoint();
 
+		// Create reference to MoveTowards Class
 		MoveTowards _moveTowards = GetComponent<MoveTowards>();
+
+		// Apply target to MoveTowards Class
 		_moveTowards.moveToTarget(alien.wayPointTarget);
 
 	}
 
+    // When an alien is saved
+    // TODO The mothership should beam the alien up / set move to false in this class.
 	void saved()
 	{
 		MoveTowards _moveTowards = GetComponent<MoveTowards>();
@@ -80,10 +62,6 @@ public class Alien : MonoBehaviour
 		_moveTowards.speed = 4;
 		_moveTowards.moveToTarget(AlienSavedCheckPoint);
 	}
-
-    void killed(){
-        
-    }
 
 	void Update()
 	{
@@ -95,17 +73,11 @@ public class Alien : MonoBehaviour
 
 		}
 
+        // TODO Remove when mothership saves with beam.
 		if (isSaved)
 		{
 
 			saved();
-
-		}
-
-		if (isKilled)
-		{
-
-			killed();
 
 		}
 

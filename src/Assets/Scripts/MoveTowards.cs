@@ -1,25 +1,4 @@
-﻿/* aiController (UNITY C#)
-* 
-* MoveTowards:
-* 
-* USE:
-* - To move the transform this script is attached to towards a specific game object.
-* - Use the public method moveToTarget
-* 
-* PARAMS:
-* - GameObject _target
-* 
-* TEST: 
-* tbc
-* 
-* AUTHOR: 
-* Nicholas Taras
-*
-*/
-
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MoveTowards : MonoBehaviour
 {

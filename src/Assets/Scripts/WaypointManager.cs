@@ -1,28 +1,31 @@
-﻿
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Linq;
+﻿using UnityEngine;
+using System.Linq; // contains an orderby utility method.
+
+// With the definition of waypoints with a tag name this class will 
+// allow for gameobjects to navigate from one to another until it reaches the length.
 
 public class WaypointManager : MonoBehaviour {
 
-    public string tagName;
+    public string tagName; // Tag name of waypoints 
 
+    // Constructor
 	class WayPointController
 	{
-		public GameObject[] objects;
-		public bool[] checkList;
-		public string tagName;
-		public int currentIndex;
+		public GameObject[] objects; // array to assign objects to
+		public bool[] checkList;     // array to store checklist of which waypoints have been visited
+		public int currentIndex;     // currently found index in object array
 
+        // assign index 0
 		public WayPointController()
 		{
 			currentIndex = 0;
 		}
 	}
 
+	// create new instance of wayPointController
 	WayPointController wayPointController = new WayPointController();
 
+    // get waypoint by index
 	public GameObject getCurrentWayPoint()
 	{
         return wayPointController.objects[wayPointController.currentIndex];
@@ -35,6 +38,7 @@ public class WaypointManager : MonoBehaviour {
 		wayPointController.checkList = new bool[_lengthOfWayPoints];
 		int _index = 0;
 
+        // set each waypoint checklist to false (not visited)
 		foreach (GameObject objectByTagName in wayPointController.objects)
 		{
 			wayPointController.checkList[_index] = false;
@@ -59,6 +63,7 @@ public class WaypointManager : MonoBehaviour {
 		}
 	}
 
+    // Check if all waypoints are visited
 	bool allWayPointsVisited()
 	{
 		int _lengthOfWayPoints = wayPointController.objects.Length;
@@ -80,6 +85,7 @@ public class WaypointManager : MonoBehaviour {
 
 	}
 
+    // when waypoint is reached
 	bool wayPointReached(GameObject _target)
 	{
 
@@ -96,14 +102,15 @@ public class WaypointManager : MonoBehaviour {
 
 	}
 
+    // sort waypoints by name a-z
 	void Start()
 	{
-		wayPointController.tagName = tagName;
-        wayPointController.objects = GameObject.FindGameObjectsWithTag(wayPointController.tagName).OrderBy(go => go.name).ToArray();
-        Debug.Log(wayPointController.objects[0].name + wayPointController.objects.Length);
+        wayPointController.objects = GameObject.FindGameObjectsWithTag(tagName).OrderBy(go => go.name).ToArray();
 		initialiseWayPointCheckList();
 	}
 
+    // As the other Script MoveTowards animates aliens towards the way point
+    // We check if the waypoint is met, where if true we can look for the next if less than length.
 	void Update()
 	{
 

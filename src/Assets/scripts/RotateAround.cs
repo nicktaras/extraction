@@ -1,20 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+
+// Class to apply rotation around a chosen object.
+// in this game we use this to rotate the camera 
+// around the centre of the stage.
 
 public class RotateAround : MonoBehaviour {
 
-    public Transform target;
-
-	//void Start () {}
-
-	//void Update () {
-        //transform.LookAt(target);
-        //transform.Translate(Vector3.right * Time.deltaTime);
-	//}
-
-    private float speedMod = 0.2f;//a speed modifier
-    private Vector3 point; //the coord to the point where the camera looks at
+    public Transform target; // targer to rotate around
+    private float speedMod = 0.2f; // speed
+    private Vector3 point; // point to rotate around.
 
     void Start()
     {
@@ -24,7 +18,7 @@ public class RotateAround : MonoBehaviour {
 
     void Update()
     {
-        //makes the camera rotate around "point" coords, rotating around its Y axis, 20 degrees per second times the speed modifier
+        // makes the camera rotate around "point" coords, rotating around its Y axis, 20 degrees per second times the speed modifier
         transform.RotateAround(point, new Vector3(0.0f, 1.0f, 0.0f), 10 * Time.deltaTime * speedMod);
     }
 }
