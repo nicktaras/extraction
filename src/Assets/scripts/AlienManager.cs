@@ -18,6 +18,9 @@ public class AlienManager : MonoBehaviour
 		// Find a random index between zero and one less than the number of spawn points.
 		int spawnPointIndex = Random.Range(0, spawnPoints.Length -1);
 
+        //Aliens
+        alien = GameObject.FindGameObjectsWithTag("Alien")[Random.Range(0, spawnPoints.Length - 1)];
+
         // get alien waypoint manager class
         WaypointManager waypointManager = alien.GetComponent<WaypointManager>();
 

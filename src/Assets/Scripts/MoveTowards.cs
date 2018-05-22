@@ -8,8 +8,14 @@ public class MoveTowards : MonoBehaviour
 
 	void Start()
 	{
-        speed = Random.Range(0.5F, 1.2F);
+        randomiseSpeed();
 	}
+
+    public void randomiseSpeed(){
+		float speedA = speed - 0.2F;
+		float speedB = speed + 0.2F;
+		speed = Random.Range(speedA, speedB);
+    }
 
 	public void moveToTarget(GameObject _target)
 	{

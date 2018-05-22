@@ -59,7 +59,7 @@ public class Alien : MonoBehaviour
 	{
 		MoveTowards _moveTowards = GetComponent<MoveTowards>();
 		GameObject AlienSavedCheckPoint = GameObject.Find("AlienSavedCheckPoint");
-		_moveTowards.speed = 4;
+        _moveTowards.speed = 1.5F;
 		_moveTowards.moveToTarget(AlienSavedCheckPoint);
 	}
 
