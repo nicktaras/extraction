@@ -28,7 +28,13 @@ public class WaypointManager : MonoBehaviour {
     // get waypoint by index
 	public GameObject getCurrentWayPoint()
 	{
-        return wayPointController.objects[wayPointController.currentIndex];
+        if (wayPointController.currentIndex > -1)
+        {
+            return wayPointController.objects[wayPointController.currentIndex];
+        } else {
+        gameObject.GetComponent<Alien>().isAllowedToMove = false; // TECH DEBT!
+            return wayPointController.objects[0];
+        }
 	}
 
     // Find the length of way points and build an array of them.

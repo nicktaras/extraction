@@ -19,15 +19,19 @@ public class AlienManager : MonoBehaviour
 		int spawnPointIndex = Random.Range(0, spawnPoints.Length -1);
 
         //Aliens
-        alien = GameObject.FindGameObjectsWithTag("Alien")[Random.Range(0, spawnPoints.Length - 1)];
+        if (GameObject.FindGameObjectsWithTag("Alien") != null)
+        {
+            alien = GameObject.FindGameObjectsWithTag("Alien")[Random.Range(0, spawnPoints.Length - 1)];
 
-        // get alien waypoint manager class
-        WaypointManager waypointManager = alien.GetComponent<WaypointManager>();
+			// get alien waypoint manager class
+			WaypointManager waypointManager = alien.GetComponent<WaypointManager>();
 
-        waypointManager.tagName = WayPointTags;
+			waypointManager.tagName = WayPointTags;
 
-		// Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
-        Instantiate(alien, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+			// Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
+			Instantiate(alien, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+
+        } 
 
 	}
 }    

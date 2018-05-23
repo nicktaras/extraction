@@ -20,8 +20,11 @@ public class AlienCollisionManager : MonoBehaviour {
         // TODO Move this to Beam collider.
         if (col.gameObject.tag == "Beam")
         {
-            gameObject.GetComponent<Alien>().isSaved = true;
-            gameObject.GetComponent<Alien>().isAllowedToMove = false;
+            this.gameObject.GetComponent<Alien>().isSaved = true;
+            this.gameObject.GetComponent<Alien>().isAllowedToMove = false;
+
+            GameObject bot = this.gameObject.transform.Find("xbot").gameObject;
+            bot.GetComponent<BotAnimator>().alienSaved();
         }
 
 		// Beam has successfully collected Alien
@@ -35,8 +38,16 @@ public class AlienCollisionManager : MonoBehaviour {
         // Destroy the alien
         // TODO Move this to explosion collider
         if (col.gameObject.tag == "Explosion"){
-            Destroy(this.gameObject);
+
             DispatchAlienKilledEvent();
+
+            //gameObject.GetComponent<Alien>().isSaved = false;
+            //gameObject.GetComponent<Alien>().isAllowedToMove = false;
+
+			//GameObject bot = GameObject.FindWithTag("Bot");
+			//bot.GetComponent<BotAnimator>().alienKilled();
+
+			Destroy(this.gameObject); // use timer.
         }
 
     }

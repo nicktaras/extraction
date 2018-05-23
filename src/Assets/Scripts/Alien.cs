@@ -59,8 +59,12 @@ public class Alien : MonoBehaviour
 	{
 		MoveTowards _moveTowards = GetComponent<MoveTowards>();
 		GameObject AlienSavedCheckPoint = GameObject.Find("AlienSavedCheckPoint");
-        _moveTowards.speed = 1.5F;
+
+        _moveTowards.speed = 0.5F;
 		_moveTowards.moveToTarget(AlienSavedCheckPoint);
+
+        isAllowedToMove = false;
+
 	}
 
 	void Update()
@@ -71,7 +75,12 @@ public class Alien : MonoBehaviour
 
 			move();
 
-		}
+        } else {
+
+			MoveTowards _moveTowards = GetComponent<MoveTowards>();
+            _moveTowards.speed = 0;
+
+        }
 
         // TODO Remove when mothership saves with beam.
 		if (isSaved)

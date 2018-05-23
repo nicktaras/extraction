@@ -1,10 +1,9 @@
 ﻿<Properties StartupConfiguration="{4CFFDA30-0E63-039E-0DCA-DAC117CE2649}|">
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/AlienManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/BotAnimator.cs">
     <Files>
-      <File FileName="Assets/Scripts/MoveTowards.cs" Line="12" Column="3" />
-      <File FileName="Assets/Scripts/Alien.cs" Line="62" Column="35" />
-      <File FileName="Assets/Scripts/AlienManager.cs" Line="5" Column="82" />
+      <File FileName="Assets/Scripts/BotAnimator.cs" Line="11" Column="6" />
+      <File FileName="Assets/Scripts/AlienCollisionManager.cs" Line="25" Column="13" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
