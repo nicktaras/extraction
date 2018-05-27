@@ -15,9 +15,15 @@ public class ChangeScene : MonoBehaviour {
 		StartButton.onClick.AddListener(StartGame);
 	}
 
+    void ResetScore() {
+		GameManager.aliensSaved = 0;
+		GameManager.aliensLost = 0;
+    }
+
     // upon click start game
     void StartGame ()
     {
+        ResetScore();
         Application.LoadLevel("Game");    
     }
 	

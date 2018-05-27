@@ -21,7 +21,8 @@ public class MoveTowards : MonoBehaviour
 	{
         
 		float step = speed * Time.deltaTime;
-		transform.position = Vector3.MoveTowards(transform.position, _target.transform.position, step);
+
+        transform.position = Vector3.MoveTowards(transform.position, _target.transform.position, step);
 
 		//find the vector pointing from our position to the target
 		Vector3 _direction = (_target.transform.position - transform.position).normalized;

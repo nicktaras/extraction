@@ -20,7 +20,7 @@ public class BotAnimator : MonoBehaviour
 
 	public void alienKilled ()
 	{
-        anim.Play("Dying Backwards");
+        anim.Play("Dying");
 	}
 
 	void Update () {}

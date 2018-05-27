@@ -2,10 +2,11 @@
 
 public class AlienManager : MonoBehaviour
 {
-    public GameObject alien;                // The enemy prefab to be spawned.
-	public float spawnTime = 3f;            // How long between each spawn.
-	public Transform[] spawnPoints;         // An array of the spawn points this enemy can spawn from.
-    public string WayPointTags;             // Which waypoints to apply
+	public GameObject alienMale;                // GameObject Prefab to create from.
+	public GameObject alienFemale;              // GameObject Prefab to create from.
+	public float spawnTime = 3f;                // How long between each spawn.
+	public Transform[] spawnPoints;             // An array of the spawn points this enemy can spawn from.
+    public string WayPointTags;                 // Which waypoints to apply
 
 	void Start()
 	{
@@ -13,25 +14,36 @@ public class AlienManager : MonoBehaviour
 		InvokeRepeating("Spawn", spawnTime, spawnTime);
 	}
 
+    GameObject GetAlienType() {
+        
+		int randomSelectAlienType = Random.Range(0, 2);
+
+		if (randomSelectAlienType == 0)
+		{
+			return alienMale;
+		}
+		
+		return alienFemale;
+
+    }
+
 	void Spawn()
 	{
-		// Find a random index between zero and one less than the number of spawn points.
-		int spawnPointIndex = Random.Range(0, spawnPoints.Length -1);
 
-        //Aliens
-        if (GameObject.FindGameObjectsWithTag("Alien") != null)
-        {
-            alien = GameObject.FindGameObjectsWithTag("Alien")[Random.Range(0, spawnPoints.Length - 1)];
+        // Get / Set Alien Male / Female Prefab.
+        GameObject alien = GetAlienType();
 
-			// get alien waypoint manager class
-			WaypointManager waypointManager = alien.GetComponent<WaypointManager>();
+        // Get Waypoint Manager Script from Alien
+        WaypointManager waypointManager = alien.GetComponent<WaypointManager>();
 
-			waypointManager.tagName = WayPointTags;
+        // TO INVESTIGATE
+        waypointManager.tagName = WayPointTags;
 
-			// Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
-			Instantiate(alien, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+        // Choose a random way point to spawn from
+        int spawnPointIndex = Random.Range(0, spawnPoints.Length - 1);
 
-        } 
+        // instantiate alien from spawn point
+        Instantiate(alien, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
 
 	}
 }    

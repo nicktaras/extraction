@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour {
 
     // Refernce to score.
     public Text score;                  // Reference to Text object in Scene
-    private float countDownTime = 180f; // Time left in seconds
+    private float countDownTime = 300f;   // Time left in seconds
 
     // subscribe for when aliens are saved or killed
 	void OnEnable()

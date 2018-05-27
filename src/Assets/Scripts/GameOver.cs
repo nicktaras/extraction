@@ -17,7 +17,7 @@ public class GameOver : MonoBehaviour {
 
 		if (score < -100)
 		{
-			resultFeedBack = "Who's side are you on son. A lot of innocent lives were lost out there today.";
+			resultFeedBack = "Who's side are you on. A lot of innocent lives were lost out there today.";
 		}
 		if (score > -50)
 		{

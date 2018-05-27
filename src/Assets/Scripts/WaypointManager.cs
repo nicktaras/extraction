@@ -32,7 +32,7 @@ public class WaypointManager : MonoBehaviour {
         {
             return wayPointController.objects[wayPointController.currentIndex];
         } else {
-        gameObject.GetComponent<Alien>().isAllowedToMove = false; // TECH DEBT!
+            gameObject.GetComponent<Alien>().isAllowedToMove = false; // TECH DEBT!
             return wayPointController.objects[0];
         }
 	}

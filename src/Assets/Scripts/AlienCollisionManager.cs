@@ -14,6 +14,10 @@ public class AlienCollisionManager : MonoBehaviour {
 	public delegate void AlienKilled();
 	public static event AlienKilled DispatchAlienKilledEvent;
 
+    // Dying Animation.
+    public float countDownTime = 3;
+    public bool AlienKilledFlag = false;
+
     void OnCollisionEnter(Collision col)
     {
         // Collect Alien with Beam
@@ -25,6 +29,7 @@ public class AlienCollisionManager : MonoBehaviour {
 
             GameObject bot = this.gameObject.transform.Find("xbot").gameObject;
             bot.GetComponent<BotAnimator>().alienSaved();
+
         }
 
 		// Beam has successfully collected Alien
@@ -36,19 +41,44 @@ public class AlienCollisionManager : MonoBehaviour {
         }
 
         // Destroy the alien
-        // TODO Move this to explosion collider
+        // TODO Move this to explosion collider?
         if (col.gameObject.tag == "Explosion"){
 
-            DispatchAlienKilledEvent();
+            // If they have not been Saved they die.
+            if (!this.gameObject.GetComponent<Alien>().isSaved)
+            {
 
-            //gameObject.GetComponent<Alien>().isSaved = false;
-            //gameObject.GetComponent<Alien>().isAllowedToMove = false;
+                DispatchAlienKilledEvent();
 
-			//GameObject bot = GameObject.FindWithTag("Bot");
-			//bot.GetComponent<BotAnimator>().alienKilled();
+                Debug.Log("Alien Killed");
 
-			Destroy(this.gameObject); // use timer.
+                gameObject.GetComponent<Alien>().isSaved = false;
+                gameObject.GetComponent<Alien>().isAllowedToMove = false;
+
+                GameObject bot = this.gameObject.transform.Find("xbot").gameObject;
+                bot.GetComponent<BotAnimator>().alienKilled();
+
+                Debug.Log("Alien Killed");
+
+                AlienKilledFlag = true;
+
+            }
         }
+
+    }
+
+    void Update (){
+
+        if (AlienKilledFlag == true)
+        {
+            countDownTime -= Time.deltaTime;
+
+        }
+
+		if (countDownTime <= 0.0f)
+		{
+			Destroy(this.gameObject);
+		}
 
     }
 
