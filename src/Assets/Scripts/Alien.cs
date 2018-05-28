@@ -57,11 +57,11 @@ public class Alien : MonoBehaviour
     // TODO The mothership should beam the alien up / set move to false in this class.
 	void saved()
 	{
-		MoveTowards _moveTowards = GetComponent<MoveTowards>();
+		MoveTowardsBeam _moveTowardsBeam = GetComponent<MoveTowardsBeam>();
 		GameObject AlienSavedCheckPoint = GameObject.Find("AlienSavedCheckPoint");
 
-        _moveTowards.speed = 0.5F;
-		_moveTowards.moveToTarget(AlienSavedCheckPoint);
+        _moveTowardsBeam.speed = 0.5F;
+		_moveTowardsBeam.moveToTarget(AlienSavedCheckPoint);
 
         isAllowedToMove = false;
 

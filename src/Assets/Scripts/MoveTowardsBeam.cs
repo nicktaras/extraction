@@ -17,10 +17,11 @@ public class MoveTowardsBeam : MonoBehaviour
 		speed = Random.Range(speedA, speedB);
     }
 
+    // TODO Animate alien to center of beam - then up :) 
 	public void moveToTarget(GameObject _target)
 	{
-        
-		float step = speed * Time.deltaTime;
+    		
+        float step = speed * Time.deltaTime;
 
         // move object towards beam...
         Vector3 test = new Vector3(_target.transform.position.x, transform.position.y, _target.transform.position.z);
